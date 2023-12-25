@@ -242,5 +242,14 @@ public class PrototypeExample {
         person2.display();
     }
 }
-
 ```
+# Prototype with Registry
+
+## Overview
+The Prototype Design Pattern involves creating new objects by copying an existing object, while the Prototype Registry centralizes the management of prototypes. This combination is useful when creating objects involves a costly or complex initialization process.
+
+## Prototype Pattern:
+The Prototype Pattern is a creational design pattern that involves creating new objects by copying an existing object, known as the prototype. Instead of using a constructor, objects are cloned to create new instances. This pattern is useful when the cost of creating a new object is more expensive than copying an existing one.
+
+## Prototype Registry (or Prototype Manager) Pattern:
+The Prototype Registry Pattern involves using a registry or manager to keep track of various prototypes. This registry provides a central place to store and retrieve prototype objects. Instead of creating and maintaining instances directly, clients can request instances from the registry.
