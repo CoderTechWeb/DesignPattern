@@ -121,3 +121,49 @@ public class Singleton {
         return instance;
     }
 }
+```
+
+# Builder Design Pattern
+## Overview
+The Builder pattern provides a simple and safe way to build objects that have many optional parameters, addressing the telescoping constructor problem.
+
+When we have too many parameter setting constructors for each field or a combination of many fields is cumbersome, leading to code complexity like below, which is called the telescoping constructor solution. This is not suitable
+
+```java
+public Book(String isbn, String title) {
+        this(isbn, title, null);
+    }
+
+    public Book(String isbn, String title) {
+        this(isbn, title, genre, null);
+    }
+
+    public Book(String isbn, String title, String author) {
+        this(isbn, title, genre, author, null);
+    }
+
+    public Book(String isbn, String title, String author, Year published) {
+        this(isbn, title, genre, author, published, null);
+    }
+
+    public Book(String isbn, String title, String author, Year published, String description) {
+        this.isbn = isbn;
+        this.title = title;
+        this.author = author;
+        this.published = published;
+        this.description = description;
+    }
+```
+
+## Why Use the Builder Design Pattern?
+1. **Flexible Object Construction:**
+   - The pattern allows the construction of a complex object to be done step by step, enabling the creation of different representations of the same object.
+
+2. **Clear Separation of Concerns:**
+   - Separates the construction process from the actual representation, promoting a clear division of responsibilities between the director, builder, and product.
+
+3. **Easier Maintenance and Extensibility:**
+   - Makes it easier to introduce new variants of a product or make changes to the existing construction process without affecting the client code.
+
+4. **Avoids Telescoping Constructors:**
+   - Provides a more readable and maintainable alternative to telescoping constructors when dealing with a large number of optional parameters.
