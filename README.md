@@ -253,3 +253,15 @@ The Prototype Pattern is a creational design pattern that involves creating new 
 
 ## Prototype Registry (or Prototype Manager) Pattern:
 The Prototype Registry Pattern involves using a registry or manager to keep track of various prototypes. This registry provides a central place to store and retrieve prototype objects. Instead of creating and maintaining instances directly, clients can request instances from the registry.
+
+# Factory Pattern:
+
+The Factory Pattern provides an interface for creating objects in a super class but allows subclasses to alter the type of objects that will be created. It involves a single interface or abstract class with a method for creating objects, and multiple concrete classes that implement this interface to create different types of objects.
+
+# Abstract Factory Pattern:
+
+The Abstract Factory Pattern provides an interface for creating families of related or dependent objects without specifying their concrete classes. It involves multiple interfaces or abstract classes (one for each type of object), each with multiple concrete implementations. The concrete factories produce families of related objects.
+
+## When to use each
+
+Factory Pattern is suitable for creating a single type of object, while the Abstract Factory Pattern is suitable for creating families of related objects with multiple variations. The choice between them depends on the complexity and structure of the objects you need to create in your application.
