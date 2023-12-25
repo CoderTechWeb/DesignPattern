@@ -129,6 +129,9 @@ The Builder pattern provides a simple and safe way to build objects that have ma
 
 When we have too many parameter setting constructors for each field or a combination of many fields is cumbersome, leading to code complexity like below, which is called the telescoping constructor solution. This is not suitable
 
+### Resource
+ https://blogs.oracle.com/javamagazine/post/exploring-joshua-blochs-builder-design-pattern-in-java]
+
 ```java
 public Book(String isbn, String title) {
         this(isbn, title, null);
