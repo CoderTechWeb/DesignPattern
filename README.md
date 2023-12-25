@@ -5,71 +5,62 @@ This project leverages a variety of design patterns to enhance flexibility, main
 
 ## Creational Patterns
 
-### Singleton Pattern
+## Purpose: 
+Creational patterns deal with object creation mechanisms, trying to create objects in a manner suitable to the situation.
 
-Ensures a class has only one instance and provides a global point of access to it.
+## Focus: 
+They focus on how objects are instantiated and composed to form larger structures.
 
-### Factory Method Pattern
+## Examples:
 
-Defines an interface for creating an object, allowing subclasses to alter the type of objects that will be created.
+1. **Singleton Pattern:**
+   - Ensures a class has only one instance and provides a global point of access to it.
+   
+2. **Factory Method Pattern:**
+   - Defines an interface for creating an object but leaves the choice of its type to the subclasses.
+   
+3. **Abstract Factory Pattern:**
+   - Provides an interface for creating families of related or dependent objects without specifying their concrete classes.
 
-### Abstract Factory Pattern
-
-Provides an interface for creating families of related or dependent objects without specifying their concrete classes.
-
-### Builder Pattern
-
-Separates the construction of a complex object from its representation, allowing the same construction process to create different representations.
-
-### Prototype Pattern
-
-Creates new objects by copying an existing object, known as the prototype.
+4. **Builder Pattern:**
+   - Separates the construction of a complex object from its representation.
+   
+5. **Prototype Pattern:**
+   - Creates new objects by copying an existing object, known as the prototype.
 
 ## Structural Patterns
 
-### Adapter Pattern
+### Purpose: 
+Structural patterns deal with object composition, creating relationships between objects to form larger structures.
 
-Allows the interface of an existing class to be used as another interface.
+### Focus: 
+They focus on simplifying the composition of classes and objects to create more flexible and reusable systems.
 
-### Decorator Pattern
+1. **Adapter Pattern:**
+   - Allows the interface of an existing class to be used as another interface.
 
-Attaches additional responsibilities to an object dynamically, providing a flexible alternative to subclassing.
+2. **Bridge Pattern:**
+   - Separates an object’s abstraction from its implementation so that the two can vary independently.
 
-### Proxy Pattern
+3. **Composite Pattern:**
+    - Composes objects into tree structures to represent part-whole hierarchies.
 
-Provides a surrogate or placeholder for another object to control access to it.
+4. **Decorator Pattern:**
+    - Attaches additional responsibilities to an object dynamically.
 
-### Composite Pattern
+5. **Facade Pattern:**
+    - Provides a simplified interface to a set of interfaces in a subsystem.
 
-Composes objects into tree structures to represent part-whole hierarchies.
-
-### Facade Pattern
-
-Provides a simplified interface to a set of interfaces in a subsystem, making it easier to use.
+6. **Flyweight Pattern:**
+    - Minimizes memory usage or computational expenses by sharing as much as possible with related objects.
 
 ## Behavioral Patterns
 
-### Observer Pattern
+### Purpose: 
+Behavioral patterns deal with the interaction and responsibilities of objects, defining patterns for how they collaborate and communicate.
 
-Defines a one-to-many dependency between objects, where changes in one object result in the automatic notification of others.
-
-### Strategy Pattern
-
-Defines a family of algorithms, encapsulates each one, and makes them interchangeable.
-
-### Command Pattern
-
-Encapsulates a request as an object, allowing for parameterization of clients with different requests.
-
-### Chain of Responsibility Pattern
-
-Passes requests along a chain of handlers, allowing each handler to decide either to process the request or to pass it to the next handler in the chain.
-
-### State Pattern
-
-Allows an object to alter its behavior when its internal state changes.
-
-These patterns contribute to a well-organized and efficient design, offering solutions to common design problems and fostering best practices in software development. Feel free to explore and contribute to the project!
+### Focus: 
+They focus on how objects interact and communicate with each other, encapsulating the patterns of communication between objects.
 
 # Singleton Pattern
 
