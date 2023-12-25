@@ -170,3 +170,77 @@ public Book(String isbn, String title) {
 
 4. **Avoids Telescoping Constructors:**
    - Provides a more readable and maintainable alternative to telescoping constructors when dealing with a large number of optional parameters.
+
+# Prototype Pattern
+
+The Prototype Design Pattern is a creational design pattern that involves creating new objects by copying an existing object, known as the prototype. This pattern is useful when the cost of creating a new object is more expensive than copying an existing one.
+
+```Java
+
+/**
+ * Prototype Design Pattern Example
+ */
+
+// Step 1: Create a prototype interface
+interface PersonPrototype {
+    PersonPrototype clone();
+
+    void customize(String name, int age);
+    void display();
+}
+
+// Step 2: Implement concrete prototype class
+class ConcretePerson implements PersonPrototype {
+    private String name;
+    private int age;
+
+    public ConcretePerson() {
+        // Default constructor
+    }
+
+    private ConcretePerson(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    @Override
+    public PersonPrototype clone() {
+        return new ConcretePerson(this.name, this.age);
+    }
+
+    @Override
+    public void customize(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    @Override
+    public void display() {
+        System.out.println("Name: " + name + ", Age: " + age);
+    }
+}
+
+// Step 3: Client code
+public class PrototypeExample {
+    public static void main(String[] args) {
+        // Create a prototype person
+        PersonPrototype prototypePerson = new ConcretePerson();
+
+        // Customize and clone
+        PersonPrototype person1 = prototypePerson.clone();
+        person1.customize("Alice", 30);
+
+        // Customize and clone again
+        PersonPrototype person2 = prototypePerson.clone();
+        person2.customize("Bob", 25);
+
+        // Display customized persons
+        System.out.println("Person 1:");
+        person1.display();
+
+        System.out.println("\nPerson 2:");
+        person2.display();
+    }
+}
+
+```
