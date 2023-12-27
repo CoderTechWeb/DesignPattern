@@ -66,6 +66,9 @@ They focus on how objects interact and communicate with each other, encapsulatin
 
 The Singleton Pattern is a design pattern that ensures a class has only one instance and provides a global point of access to that instance. It is particularly useful when exactly one object is needed to coordinate actions across the system.
 
+### Shopping cart
+ - If the ShoppingCart bean were configured as a singleton, a single instance of the ShoppingCart would be shared among all users of the application. This would lead to undesirable behavior in the context of a shopping cart, where each user should have their own isolated cart.
+
 ## Overview
 
 The pattern allows us to create a class for which only one object can be created, providing a global point of access to that instance throughout the application.
