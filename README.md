@@ -413,3 +413,4 @@ This pattern is particularly useful when there are multiple ways to perform a ta
     creditCardContext.processPayment(100L);
     payPalPaymentProcessor.processPayment(500);
 ```
+
