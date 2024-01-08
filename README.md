@@ -259,3 +259,88 @@ The Abstract Factory Pattern provides an interface for creating families of rela
 ## When to use each
 
 Factory Pattern is suitable for creating a single type of object, while the Abstract Factory Pattern is suitable for creating families of related objects with multiple variations. The choice between them depends on the complexity and structure of the objects you need to create in your application.
+
+## Behavioral Patterns
+
+# Observer Pattern
+
+The Observer Pattern is a behavioral design pattern where an object, known as the subject, maintains a list of its dependents, called observers, that are notified of any state changes, typically by calling one of their methods.
+
+This pattern is useful in scenarios where multiple objects need to be informed about changes in another object's state without coupling the sender to its recipients.
+
+Read more: https://javarevisited.blogspot.com/2011/12/observer-design-pattern-java-example.html#ixzz8OFHalr9y
+
+### Example
+1. Company updates all its shareholders for any decision they make here Company is Subject and Shareholders are Observers, any change in the policy of company and the Company notifies all its Shareholders or Observer.
+
+2. When interest rate of Loan is subject to change and when it changes, Loan notifies to Newspaper or Internet media to display a new loan interest rate.
+
+## How it Works
+
+### Components
+1. **Subject:** The object that holds a list of observers and notifies them of state changes.
+
+2. **Observer:** An interface or abstract class that defines the update method. Concrete observers implement this method to react to changes.
+
+## Implementation Example
+
+we have a Subject interface that contains methods for adding, removing and notifying Observers and an Observer interface which contains update(int interest) method which will be called by the Subject implementation when the interest rate changes.
+
+1. **Define Subject Interface/Class:**
+   - Create an interface or class that represents the subject. This should include methods for attaching, detaching, and notifying observers.
+
+```Java
+   public interface Subject {
+      void registerObserver(Observer observer);
+      void removeObserver(Observer observer);
+      void notifyObserver();
+   }
+```
+
+2. **Define Observer Interface/Class:**
+   - Create an interface or class for observers. This should include the update method.
+
+```Java
+    public interface Observer {
+        void update(float interest);
+    }
+```
+
+3. **Implement Concrete Classes:**
+   - Create concrete classes for the subject and observers.
+
+```Java
+    public class Loan implements  Subject{
+      // Implementation of Subject methods
+    }
+    
+    public class Newspaper implements Observer{
+       // Implementation of Subject methods
+    }
+```
+
+4. **Use Observer Pattern:**
+   - In your application, instantiate the subject and observers, and demonstrate how changes in the subject trigger updates in the observers.
+
+```Java
+   public class ObserverTest {
+   
+       public static void main(String[] args) {
+           Newspaper newspaper = new Newspaper();
+           Internet internet = new Internet();
+   
+           Loan loan = new Loan("Personal Loan", 12.5f, "Standard Charterd");
+           loan.registerObserver(newspaper);
+           loan.registerObserver(internet);
+           loan.setInterest(3.5f);
+   
+          loan.notifyObserver();
+           System.out.println();
+       }
+   }
+```
+
+### Benefits
+1. **Loose Coupling:** The subject and observers are decoupled, allowing for easier maintenance and extension of the system.
+
+2. **Flexibility:** It supports a one-to-many dependency relationship between objects, enabling dynamic runtime changes.
