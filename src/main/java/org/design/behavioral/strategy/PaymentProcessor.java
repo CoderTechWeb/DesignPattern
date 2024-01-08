@@ -2,7 +2,7 @@ package org.design.behavioral.strategy;
 
 public class PaymentProcessor {
 
-    private PaymentStrategy paymentStrategy;
+    private final PaymentStrategy paymentStrategy;
 
     public PaymentProcessor(PaymentStrategy paymentStrategy) {
         this.paymentStrategy = paymentStrategy;
