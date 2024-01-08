@@ -1,4 +1,4 @@
-package org.design.behavioral.strategy;
+package org.design.behavioral.strategy.withoutpattern;
 
 public enum PaymentType {
     CREDIT_CARD,

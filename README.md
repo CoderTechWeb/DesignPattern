@@ -344,3 +344,73 @@ we have a Subject interface that contains methods for adding, removing and notif
 1. **Loose Coupling:** The subject and observers are decoupled, allowing for easier maintenance and extension of the system.
 
 2. **Flexibility:** It supports a one-to-many dependency relationship between objects, enabling dynamic runtime changes.
+
+# Strategy Pattern
+
+The Strategy Design Pattern is a behavioral design pattern. It allows you to dynamically change the behavior of an object by encapsulating it into different strategies.
+
+This pattern is particularly useful when there are multiple ways to perform a task, and the algorithm can vary independently from the client that uses it.
+
+### Example
+
+1. **Sorting algorithms:** Different sorting algorithms can be encapsulated into separate strategies and passed to an object that needs sorting.
+2. **Database access:** Different database access strategies can be encapsulated into separate strategies and passed to an object that needs to access data from different sources.
+3. **Payment strategy:** Different payment methods can be encapsulated into separate strategies and passed to an object that needs to process payments.
+   - In a shopping cart application, the Strategy Design Pattern can be employed to neatly organize various payment methods, such as credit card, PayPal, and cryptocurrency, into distinct strategies. Each strategy encapsulates its own unique processing logic. This approach enables the application's payment processing system to delegate the payment handling tasks to the active payment method's strategy.
+
+## Implementation Example
+
+1. **PaymentStrategy Interface:** Declares a method for executing the payment strategy.
+```Java
+   public interface PaymentStrategy { 
+        void processPayment(double amount);
+   } 
+```
+
+2. **Concrete Payment Strategies:** Classes that implement the PaymentStrategy interface, providing specific payment implementations.
+
+```Java
+   public class CreditCardPayment implements PaymentStrategy {
+      public void processPayment(double amount) {
+      // Implementation of credit card payment
+      }
+   }
+
+   public class PayPalPayment implements PaymentStrategy {
+      public void processPayment(double amount) {
+      // Implementation of PayPal payment
+      }
+   }
+```
+
+3. **PaymentContext Class:** Contains a reference to the PaymentStrategy interface and provides a method to execute the payment strategy.
+
+```Java
+   public class PaymentContext {
+       private PaymentStrategy paymentStrategy;
+   
+       public PaymentContext(PaymentStrategy paymentStrategy) {
+           this.paymentStrategy = paymentStrategy;
+       }
+   
+       public void processPayment(double amount) {
+           paymentStrategy.processPayment(amount);
+       }
+   }
+```
+
+4. **Choose a Payment Strategy:** Instantiate the PaymentContext with a specific payment strategy (e.g., CreditCardPayment or PayPalPayment).
+
+```Java
+    PaymentContext creditCardContext = new PaymentContext(new CreditCardPaymentStrategy());
+    PaymentProcessor payPalPaymentProcessor = new PaymentProcessor(new PayPalPayment());
+
+```
+
+5. **Process Payment:** Use the processPayment method to execute the chosen payment strategy.
+
+```java
+    creditCardContext.processPayment(100L);
+    payPalPaymentProcessor.processPayment(500);
+```
+
