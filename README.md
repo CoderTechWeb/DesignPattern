@@ -260,9 +260,9 @@ The Abstract Factory Pattern provides an interface for creating families of rela
 
 Factory Pattern is suitable for creating a single type of object, while the Abstract Factory Pattern is suitable for creating families of related objects with multiple variations. The choice between them depends on the complexity and structure of the objects you need to create in your application.
 
-## Behavioral Patterns
+# Behavioral Patterns
 
-# Observer Pattern
+## Observer Pattern
 
 The Observer Pattern is a behavioral design pattern where an object, known as the subject, maintains a list of its dependents, called observers, that are notified of any state changes, typically by calling one of their methods.
 
@@ -345,7 +345,7 @@ we have a Subject interface that contains methods for adding, removing and notif
 
 2. **Flexibility:** It supports a one-to-many dependency relationship between objects, enabling dynamic runtime changes.
 
-# Strategy Pattern
+## Strategy Pattern
 
 The Strategy Design Pattern is a behavioral design pattern. It allows you to dynamically change the behavior of an object by encapsulating it into different strategies.
 
@@ -414,3 +414,7 @@ This pattern is particularly useful when there are multiple ways to perform a ta
     payPalPaymentProcessor.processPayment(500);
 ```
 
+### Benefits
+**Flexibility:** Easily switch between different payment strategies at runtime.
+**Maintainability:** Payment strategies are encapsulated in separate classes, making the code easier to maintain and extend.
+**Scalability:** Adding new payment strategies is straightforward without modifying existing code.
