@@ -550,3 +550,14 @@ Now, to cater to the diverse preferences of customers, your system employs the D
 - **Flexibility:** Allows adding or altering object behavior dynamically.
 - **Reusable Components:** Decorators can be reused and combined in various ways.
 - **Open/Closed Principle:** Follows the open/closed principle, allowing for extension without modifying existing code.
+
+# Facade Pattern
+
+The Facade Design Pattern is a structural pattern that provides a simplified interface to a set of interfaces in a subsystem, making it easier to use and reducing the complexity of interacting with the subsystem. It involves creating a unified interface that wraps multiple interfaces in a subsystem to make them more accessible.
+
+# Example
+
+Subsystems for a television and a sound system, and we'll create a HomeTheaterFacade to simplify the control of these subsystems.
+
+src/main/java/org/design/structural/facade/hometheater/Main.java
+
