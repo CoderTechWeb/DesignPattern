@@ -546,6 +546,7 @@ Now, to cater to the diverse preferences of customers, your system employs the D
 ```
 
 ### Benefits
-**Flexibility:** Allows adding or altering object behavior dynamically.
-**Reusable Components:** Decorators can be reused and combined in various ways.
-**Open/Closed Principle:** Follows the open/closed principle, allowing for extension without modifying existing code.
+
+- **Flexibility:** Allows adding or altering object behavior dynamically.
+- **Reusable Components:** Decorators can be reused and combined in various ways.
+- **Open/Closed Principle:** Follows the open/closed principle, allowing for extension without modifying existing code.
