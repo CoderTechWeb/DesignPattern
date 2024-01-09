@@ -561,3 +561,21 @@ Subsystems for a television and a sound system, and we'll create a HomeTheaterFa
 
 src/main/java/org/design/structural/facade/hometheater/Main.java
 
+# FlyWeight Pattern
+
+FlyWeight pattern is used to reduce the memory footprint. It can also improve performance in applications where object instantiation is expensive.
+
+Simply put, the flyweight pattern is based on a factory which recycles created objects by storing them after creation. Each time an object is requested, the factory looks up the object in order to check if it’s already been created. If it has, the existing object is returned – otherwise, a new one is created, stored and then returned.
+
+## Example
+
+In the context of a Counter-Strike game, the Flyweight Factory Pattern can be applied to optimize the creation of multiple terrorist and counter-terrorist players with similar behaviors. Specifically, terrorists share common characteristics related to placing bombs, and counter-terrorists share common characteristics related to defusing bombs.
+
+The Flyweight Factory can efficiently manage and create instances of terrorist and counter-terrorist players, reusing shared behaviors where possible. This helps minimize memory usage and enhances the game's performance by avoiding redundant object creation.
+
+### In this scenario:
+
+- The shared behavior for terrorists involves placing a bomb.
+- The shared behavior for counter-terrorists involves defusing a bomb.
+
+The Flyweight Factory ensures that instances of terrorist and counter-terrorist players are created and reused appropriately, optimizing the game's resource utilization while accommodating unique characteristics for individual players when necessary.
