@@ -10,9 +10,6 @@ Creational patterns deal with object creation mechanisms, trying to create objec
 
 ## Focus: 
 They focus on how objects are instantiated and composed to form larger structures.
-
-## Examples:
-
 1. **Singleton Pattern:**
    - Ensures a class has only one instance and provides a global point of access to it.
    
@@ -61,17 +58,19 @@ Behavioral patterns deal with the interaction and responsibilities of objects, d
 
 ### Focus: 
 They focus on how objects interact and communicate with each other, encapsulating the patterns of communication between objects.
+1. **Observer Pattern**
+2. **Strategy Pattern**
 
 # Singleton Pattern
 
 The Singleton Pattern is a design pattern that ensures a class has only one instance and provides a global point of access to that instance. It is particularly useful when exactly one object is needed to coordinate actions across the system.
 
-### Shopping cart
- - If the ShoppingCart bean were configured as a singleton, a single instance of the ShoppingCart would be shared among all users of the application. This would lead to undesirable behavior in the context of a shopping cart, where each user should have their own isolated cart.
-
 ## Overview
 
 The pattern allows us to create a class for which only one object can be created, providing a global point of access to that instance throughout the application.
+
+### Example
+- If the ShoppingCart bean were configured as a singleton, a single instance of the ShoppingCart would be shared among all users of the application. This would lead to undesirable behavior in the context of a shopping cart, where each user should have their own isolated cart.
 
 ## Advantages
 
