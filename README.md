@@ -425,3 +425,127 @@ This pattern is particularly useful when there are multiple ways to perform a ta
 **Flexibility:** Easily switch between different payment strategies at runtime.
 **Maintainability:** Payment strategies are encapsulated in separate classes, making the code easier to maintain and extend.
 **Scalability:** Adding new payment strategies is straightforward without modifying existing code.
+
+# Structural Pattern
+
+## Decorator Design Pattern
+
+A Decorator pattern can be used to attach additional responsibilities to an object either statically or dynamically. A Decorator provides an enhanced interface to the original object.
+
+This pattern is useful when you need to extend the functionalities of objects in a flexible and reusable way, without modifying their code.
+
+### Example
+
+Building a software system for a trendy coffee shop that offers a wide variety of beverages. These beverages could include traditional choices like Coffee and Tea, each with its unique flavor and pricing.
+
+Now, to cater to the diverse preferences of customers, your system employs the Decorator Design Pattern. This pattern is particularly beneficial because it allows for dynamic and flexible customization of beverages without modifying their core implementation.
+
+### Implementation Steps
+1. **Component Interface/Class(Beverage):** Create an interface or class that declares the methods to be implemented by concrete components.
+
+```Java
+    public interface Beverage {
+        String getDescription();
+        double cost();
+    }
+```
+
+2. **Implement ConcreteComponent(Coffee, Tea):** Create a class that implements the Component interface, providing the base behavior.
+
+```Java
+   public class Coffee implements Beverage {
+      public String getDescription() {
+         return "Coffee";
+      }
+   
+      public double cost() {
+         return 2.0;
+      }
+   }
+   
+   public class Tea implements Beverage {
+      public String getDescription() {
+         return "Tea";
+      }
+   
+      public double cost() {
+         return 1.5;
+      }
+   }
+```
+
+3. **Create Decorator Class(CondimentDecorator):** Define an abstract class that implements the Component interface and holds a reference to a Component.
+
+```Java
+   public abstract class CondimentDecorator implements Beverage {
+      protected Beverage beverage;
+   
+      public CondimentDecorator(Beverage beverage) {
+         this.beverage = beverage;
+      }
+   
+      public String getDescription() {
+         return beverage.getDescription();
+      }
+   
+      public double cost() {
+         return beverage.cost();
+      }
+   }
+```
+
+4. **Implement ConcreteDecorator (Milk, Sugar):** Create concrete decorator classes by extending the Decorator class and adding specific responsibilities.
+
+```Java
+   public class Milk extends CondimentDecorator {
+      public Milk(Beverage beverage) {
+         super(beverage);
+      }
+   
+      public String getDescription() {
+         return super.getDescription() + ", Milk";
+      }
+   
+      public double cost() {
+         return super.cost() + 0.5;
+      }
+   }
+   
+   public class Sugar extends CondimentDecorator {
+      public Sugar(Beverage beverage) {
+         super(beverage);
+      }
+   
+      public String getDescription() {
+         return super.getDescription() + ", Sugar";
+      }
+   
+      public double cost() {
+         return super.cost() + 0.3;
+      }
+   }
+
+```
+
+5. **Use Decorator Pattern:** In your application, create instances of concrete components and decorate them with different decorators as needed.
+
+```Java
+    Beverage coffee = new Coffee();
+    System.out.println(coffee.getDescription() + " Cost: $" + coffee.cost());
+    
+    Beverage tea = new Tea();
+    System.out.println(tea.getDescription() + " Cost: $" + tea.cost());
+
+    // Decorate Coffee with Milk and Sugar
+    Beverage milkCoffee = new Milk(new Sugar(new Coffee()));
+    System.out.println(milkCoffee.getDescription() + " Cost: $" + milkCoffee.cost());
+
+    // Decorate Tea with Milk
+    Beverage milkTea = new Milk(new Tea());
+    System.out.println(milkTea.getDescription() + " Cost: $" + milkTea.cost());
+```
+
+### Benefits
+**Flexibility:** Allows adding or altering object behavior dynamically.
+**Reusable Components:** Decorators can be reused and combined in various ways.
+**Open/Closed Principle:** Follows the open/closed principle, allowing for extension without modifying existing code.
