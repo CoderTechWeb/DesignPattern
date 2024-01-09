@@ -1,4 +1,4 @@
-package org.design.structural.decorator;
+package org.design.structural.decorator.icecream;
 
 public interface IceCream {
 
