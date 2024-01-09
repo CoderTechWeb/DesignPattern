@@ -1,4 +1,4 @@
-package org.design.structural.decorator.IceCream;
+package org.design.structural.decorator.icecream;
 
 public class OrangeCone implements  IceCream{
 
