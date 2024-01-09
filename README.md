@@ -410,8 +410,15 @@ This pattern is particularly useful when there are multiple ways to perform a ta
 5. **Process Payment:** Use the processPayment method to execute the chosen payment strategy.
 
 ```java
-    creditCardContext.processPayment(100L);
-    payPalPaymentProcessor.processPayment(500);
+    public class Main {
+        public static void main(String[] args) {
+            PaymentProcessor debitPaymentProcessor = new PaymentProcessor(new DebitCardPaymentStrategy());
+            debitPaymentProcessor.processPayment(100);
+         
+            PaymentProcessor paypalPaymentProcessor = new PaymentProcessor(new PaypalPaymentStrategy());
+            paypalPaymentProcessor.processPayment(500);
+        }
+   }
 ```
 
 ### Benefits
