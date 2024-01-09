@@ -1,4 +1,4 @@
-package org.design.structural.facade;
+package org.design.structural.facade.shape;
 
 public class Square implements  Shape{
     @Override
