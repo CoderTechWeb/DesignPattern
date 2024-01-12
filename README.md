@@ -1,7 +1,45 @@
+# Solid Principle
 
-# Design Patterns Overview
+## Single Responsibility
 
-This project leverages a variety of design patterns to enhance flexibility, maintainability, and reusability in software design. The patterns are categorized into Creational, Structural, and Behavioral patterns.
+The Single Responsibility Principle (SRP) is one of the SOLID principles of object-oriented programming. It states that a class should have only one reason to change, meaning that it should only have one responsibility.
+
+## Example
+
+Suppose we have a Report class that is responsible for generating reports and sending notifications. This violates the SRP because it has two responsibilities.
+
+```Java
+   public class Report {
+       public void generateReport() {
+           // Code to generate a report
+       }
+   
+       public void sendNotification() {
+           // Code to send a notification
+       }
+   }
+```
+To adhere to the Single Responsibility Principle, we can split this class into two separate classes, each with a single responsibility.
+
+```Java
+      // Class responsible for generating reports
+   public class ReportGenerator {
+      public void generateReport() {
+         // Code to generate a report
+      }
+   }
+   
+   // Class responsible for sending notifications
+   public class NotificationSender {
+      public void sendNotification() {
+         // Code to send a notification
+      }
+   }
+```
+
+Now, each class has a single responsibility – one for generating reports and the other for sending notifications. This makes the code more modular, maintainable, and easier to understand. If there are changes in the report generation logic, it won't affect the notification sending, and vice versa.
+
+# Design Patterns 
 
 ## Creational Patterns
 
