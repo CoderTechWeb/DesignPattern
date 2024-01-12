@@ -4,7 +4,7 @@
 
 The Single Responsibility Principle (SRP) is one of the SOLID principles of object-oriented programming. It states that a class should have only one reason to change, meaning that it should only have one responsibility.
 
-## Example
+### Example
 
 Suppose we have a Report class that is responsible for generating reports and sending notifications. This violates the SRP because it has two responsibilities.
 
@@ -38,6 +38,87 @@ To adhere to the Single Responsibility Principle, we can split this class into t
 ```
 
 Now, each class has a single responsibility – one for generating reports and the other for sending notifications. This makes the code more modular, maintainable, and easier to understand. If there are changes in the report generation logic, it won't affect the notification sending, and vice versa.
+
+## Open-Closed Principle
+
+The Open/Closed Principle (OCP) is one of the SOLID principles, and it states that a class should be open for extension but closed for modification. In other words, you should be able to add new functionality to a system without altering existing code.
+
+### Example
+
+System that calculates the total cost of different shapes. 
+Initially, we have a class that calculates the total cost directly, violating the Open/Closed Principle.
+
+```Java
+   public class TotalCostCalculator {
+       public double calculateTotalCost(Shape[] shapes) {
+           double totalCost = 0;
+           for (Shape shape : shapes) {
+               if (shape.getType().equals("Circle")) {
+                   totalCost += calculateCircleCost(shape);
+               } else if (shape.getType().equals("Rectangle")) {
+                   totalCost += calculateRectangleCost(shape);
+               }
+               // Add more conditions for other shapes
+           }
+           return totalCost;
+       }
+   
+       private double calculateCircleCost(Shape shape) {
+           // Calculation for circle cost
+           return 0;
+       }
+   
+       private double calculateRectangleCost(Shape shape) {
+           // Calculation for rectangle cost
+           return 0;
+       }
+   }
+```
+This implementation violates the Open/Closed Principle because if we want to add a new shape (e.g., a triangle), we have to modify the TotalCostCalculator class.
+
+To adhere to the Open/Closed Principle, we can introduce an abstract class (Shape) and use polymorphism to allow for extension without modification:
+
+```Java
+   public abstract class Shape {
+       public abstract double calculateCost();
+   }
+   
+   public class Circle extends Shape {
+       private double radius;
+   
+       // Constructor and other methods for Circle
+   
+       @Override
+       public double calculateCost() {
+           // Calculation for circle cost
+           return 0;
+       }
+   }
+   
+   public class Rectangle extends Shape {
+       private double length;
+       private double width;
+   
+       // Constructor and other methods for Rectangle
+   
+       @Override
+       public double calculateCost() {
+           // Calculation for rectangle cost
+           return 0;
+       }
+   }
+   
+   public class TotalCostCalculator {
+       public double calculateTotalCost(Shape[] shapes) {
+           double totalCost = 0;
+           for (Shape shape : shapes) {
+               totalCost += shape.calculateCost();
+           }
+           return totalCost;
+       }
+   }
+```
+Now, the Shape class is open for extension because you can easily add new shapes (e.g., a Triangle class) without modifying the existing TotalCostCalculator class. Each new shape extends the abstract Shape class and provides its own implementation of the calculateCost method. This adheres to the Open/Closed Principle and makes the system more flexible and maintainable.
 
 # Design Patterns 
 
