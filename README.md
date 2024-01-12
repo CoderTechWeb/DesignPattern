@@ -156,15 +156,18 @@ This violates the Liskov Substitution Principle because code that expects a Bird
 To adhere to the Liskov Substitution Principle, we should reconsider the class hierarchy. One approach is to create an interface for flying birds:
 
 ```Java
-public interface Bird {
-   void eat();
+public class Bird {
+   public void eat() {
+      System.out.println("I can eat.");
+   }
 }
 
-public interface FlyingBird extends Bird{
-    void fly();
+public class FlyingBird extends Bird {
+   public void fly() {
+      System.out.println("I can fly.");
+   }
 }
-
-public class Sparrow implements FlyingBird {
+public class Sparrow extends FlyingBird {
     @Override
     public void fly() {
         System.out.println("Sparrow is flying");
@@ -177,10 +180,90 @@ public class Sparrow implements FlyingBird {
 }
 
 public class Ostrich extends Bird {
-    // Ostrich does not implement FlyingBird interface
+    @Override
+    void eat() {
+        System.out.println("Can I eat taco?");
+    }
 }
 ```
 In this revised example, the Ostrich class does not implement the FlyingBird interface, and it doesn't include the fly method. Now, when using objects of FlyingBird, we can be confident that all implementing classes can actually fly, adhering to the Liskov Substitution Principle.
+
+## Interface segregation principle.
+
+The Interface Segregation Principle (ISP) is one of the SOLID principles, and it states that a class should not be forced to implement interfaces it does not use. In other words, a class should not be burdened with the responsibility of implementing methods it doesn't need.
+
+### Example
+Let consider Document management system where documents can be printed and scanned. Initially, we might design an interface that includes both print and scan methods:
+
+```Java
+// Interface with print and scan methods
+interface Machine {
+   void print(Document document);
+
+   void scan(Document document);
+}
+
+// Concrete class implementing the Machine interface
+class MultiFunctionPrinter implements Machine {
+   @Override
+   public void print(Document document) {
+      // Implementation for printing
+   }
+
+   @Override
+   public void scan(Document document) {
+      // Implementation for scanning
+   }
+}
+
+// Document class representing a document
+class SimplePrinter  implements Machine {
+   @Override
+   public void print(Document document) {
+      // Implementation for printing
+   }
+
+   @Override
+   public void scan(Document document) {
+      // Not valid method as this machine only print and dont scan
+   }
+}
+```
+Here's a revised example that adheres to the Interface Segregation Principle:
+
+```Java
+// Separate interfaces for print and scan functionality
+interface Printer {
+    void print(Document document);
+}
+
+interface Scanner {
+    void scan(Document document);
+}
+
+// Concrete classes implementing specific interfaces
+class SimplePrinter implements Printer {
+    @Override
+    public void print(Document document) {
+        // Implementation for printing
+    }
+}
+
+class MultiFunctionMachine implements Printer, Scanner {
+    @Override
+    public void print(Document document) {
+        // Implementation for printing
+    }
+
+    @Override
+    public void scan(Document document) {
+        // Implementation for scanning
+    }
+}
+```
+
+Now, the Printer and Scanner interfaces are separate, allowing classes to implement only the functionality they need. The SimplePrinter class implements only the Printer interface, and the MultiFunctionMachine class implements both the Printer and Scanner interfaces. This adheres to the Interface Segregation Principle, ensuring that classes are not burdened with unnecessary methods.
+
 
 # Design Patterns 
 
