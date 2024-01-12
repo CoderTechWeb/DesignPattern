@@ -120,6 +120,68 @@ To adhere to the Open/Closed Principle, we can introduce an abstract class (Shap
 ```
 Now, the Shape class is open for extension because you can easily add new shapes (e.g., a Triangle class) without modifying the existing TotalCostCalculator class. Each new shape extends the abstract Shape class and provides its own implementation of the calculateCost method. This adheres to the Open/Closed Principle and makes the system more flexible and maintainable.
 
+## Liskov substitution principle.
+
+The Liskov Substitution Principle (LSP) is one of the SOLID principles, and it states that objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program. In other words, a subclass should behave in such a way that it can be used interchangeably with its superclass.
+
+### Example
+Bird superclass and two subclasses, Sparrow and Ostrich. 
+Initially, the fly method is present in the superclass, but the Ostrich subclass cannot fly, violating the Liskov Substitution Principle.
+
+```Java
+public class Bird {
+    public void fly() {
+        System.out.println("Bird is flying");
+    }
+
+   public void eat() {
+      System.out.println("Bird is eating");
+   }
+}
+
+public class Sparrow extends Bird {
+    // Sparrow inherits the fly method from Bird
+}
+
+public class Ostrich extends Bird {
+    @Override
+    public void fly() {
+        // Ostrich cannot fly, so override and do nothing
+    }
+}
+```
+
+This violates the Liskov Substitution Principle because code that expects a Bird to fly might break when an Ostrich is substituted.
+
+To adhere to the Liskov Substitution Principle, we should reconsider the class hierarchy. One approach is to create an interface for flying birds:
+
+```Java
+public interface Bird {
+   void eat();
+}
+
+public interface FlyingBird extends Bird{
+    void fly();
+}
+
+public class Sparrow implements FlyingBird {
+    @Override
+    public void fly() {
+        System.out.println("Sparrow is flying");
+    }
+
+   @Override
+   public void eat() {
+      System.out.println("Sparrow is eating");
+   }
+}
+
+public class Ostrich extends Bird {
+    // Ostrich does not implement FlyingBird interface
+}
+```
+In this revised example, the Ostrich class does not implement the FlyingBird interface, and it doesn't include the fly method. Now, when using objects of FlyingBird, we can be confident that all implementing classes can actually fly, adhering to the Liskov Substitution Principle.
+
 # Design Patterns 
 
 ## Creational Patterns
