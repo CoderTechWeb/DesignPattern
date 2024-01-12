@@ -1,14 +1,333 @@
+# Solid Principle
 
-# Design Patterns Overview
+## Single Responsibility
 
-This project leverages a variety of design patterns to enhance flexibility, maintainability, and reusability in software design. The patterns are categorized into Creational, Structural, and Behavioral patterns.
+The Single Responsibility Principle (SRP) is one of the SOLID principles of object-oriented programming. It states that a class should have only one reason to change, meaning that it should only have one responsibility.
+
+### Example
+
+Suppose we have a Report class that is responsible for generating reports and sending notifications. This violates the SRP because it has two responsibilities.
+
+```Java
+   public class Report {
+       public void generateReport() {
+           // Code to generate a report
+       }
+   
+       public void sendNotification() {
+           // Code to send a notification
+       }
+   }
+```
+To adhere to the Single Responsibility Principle, we can split this class into two separate classes, each with a single responsibility.
+
+```Java
+      // Class responsible for generating reports
+   public class ReportGenerator {
+      public void generateReport() {
+         // Code to generate a report
+      }
+   }
+   
+   // Class responsible for sending notifications
+   public class NotificationSender {
+      public void sendNotification() {
+         // Code to send a notification
+      }
+   }
+```
+
+Now, each class has a single responsibility – one for generating reports and the other for sending notifications. This makes the code more modular, maintainable, and easier to understand. If there are changes in the report generation logic, it won't affect the notification sending, and vice versa.
+
+## Open-Closed Principle
+
+The Open/Closed Principle (OCP) is one of the SOLID principles, and it states that a class should be open for extension but closed for modification. In other words, you should be able to add new functionality to a system without altering existing code.
+
+### Example
+
+System that calculates the total cost of different shapes. 
+Initially, we have a class that calculates the total cost directly, violating the Open/Closed Principle.
+
+```Java
+   public class TotalCostCalculator {
+       public double calculateTotalCost(Shape[] shapes) {
+           double totalCost = 0;
+           for (Shape shape : shapes) {
+               if (shape.getType().equals("Circle")) {
+                   totalCost += calculateCircleCost(shape);
+               } else if (shape.getType().equals("Rectangle")) {
+                   totalCost += calculateRectangleCost(shape);
+               }
+               // Add more conditions for other shapes
+           }
+           return totalCost;
+       }
+   
+       private double calculateCircleCost(Shape shape) {
+           // Calculation for circle cost
+           return 0;
+       }
+   
+       private double calculateRectangleCost(Shape shape) {
+           // Calculation for rectangle cost
+           return 0;
+       }
+   }
+```
+This implementation violates the Open/Closed Principle because if we want to add a new shape (e.g., a triangle), we have to modify the TotalCostCalculator class.
+
+To adhere to the Open/Closed Principle, we can introduce an abstract class (Shape) and use polymorphism to allow for extension without modification:
+
+```Java
+   public abstract class Shape {
+       public abstract double calculateCost();
+   }
+   
+   public class Circle extends Shape {
+       private double radius;
+   
+       // Constructor and other methods for Circle
+   
+       @Override
+       public double calculateCost() {
+           // Calculation for circle cost
+           return 0;
+       }
+   }
+   
+   public class Rectangle extends Shape {
+       private double length;
+       private double width;
+   
+       // Constructor and other methods for Rectangle
+   
+       @Override
+       public double calculateCost() {
+           // Calculation for rectangle cost
+           return 0;
+       }
+   }
+   
+   public class TotalCostCalculator {
+       public double calculateTotalCost(Shape[] shapes) {
+           double totalCost = 0;
+           for (Shape shape : shapes) {
+               totalCost += shape.calculateCost();
+           }
+           return totalCost;
+       }
+   }
+```
+Now, the Shape class is open for extension because you can easily add new shapes (e.g., a Triangle class) without modifying the existing TotalCostCalculator class. Each new shape extends the abstract Shape class and provides its own implementation of the calculateCost method. This adheres to the Open/Closed Principle and makes the system more flexible and maintainable.
+
+## Liskov substitution principle.
+
+The Liskov Substitution Principle (LSP) is one of the SOLID principles, and it states that objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program. In other words, a subclass should behave in such a way that it can be used interchangeably with its superclass.
+
+### Example
+Bird superclass and two subclasses, Sparrow and Ostrich. 
+Initially, the fly method is present in the superclass, but the Ostrich subclass cannot fly, violating the Liskov Substitution Principle.
+
+```Java
+public class Bird {
+    public void fly() {
+        System.out.println("Bird is flying");
+    }
+
+   public void eat() {
+      System.out.println("Bird is eating");
+   }
+}
+
+public class Sparrow extends Bird {
+    // Sparrow inherits the fly method from Bird
+}
+
+public class Ostrich extends Bird {
+    @Override
+    public void fly() {
+        // Ostrich cannot fly, so override and do nothing
+    }
+}
+```
+
+This violates the Liskov Substitution Principle because code that expects a Bird to fly might break when an Ostrich is substituted.
+
+To adhere to the Liskov Substitution Principle, we should reconsider the class hierarchy. One approach is to create an interface for flying birds:
+
+```Java
+public class Bird {
+   public void eat() {
+      System.out.println("I can eat.");
+   }
+}
+
+public class FlyingBird extends Bird {
+   public void fly() {
+      System.out.println("I can fly.");
+   }
+}
+public class Sparrow extends FlyingBird {
+    @Override
+    public void fly() {
+        System.out.println("Sparrow is flying");
+    }
+
+   @Override
+   public void eat() {
+      System.out.println("Sparrow is eating");
+   }
+}
+
+public class Ostrich extends Bird {
+    @Override
+    void eat() {
+        System.out.println("Can I eat taco?");
+    }
+}
+```
+In this revised example, the Ostrich class does not implement the FlyingBird interface, and it doesn't include the fly method. Now, when using objects of FlyingBird, we can be confident that all implementing classes can actually fly, adhering to the Liskov Substitution Principle.
+
+## Interface segregation principle.
+
+The Interface Segregation Principle (ISP) is one of the SOLID principles, and it states that a class should not be forced to implement interfaces it does not use. In other words, a class should not be burdened with the responsibility of implementing methods it doesn't need.
+
+### Example
+Let consider Document management system where documents can be printed and scanned. Initially, we might design an interface that includes both print and scan methods:
+
+```Java
+// Interface with print and scan methods
+interface Machine {
+   void print(Document document);
+
+   void scan(Document document);
+}
+
+// Concrete class implementing the Machine interface
+class MultiFunctionPrinter implements Machine {
+   @Override
+   public void print(Document document) {
+      // Implementation for printing
+   }
+
+   @Override
+   public void scan(Document document) {
+      // Implementation for scanning
+   }
+}
+
+// Document class representing a document
+class SimplePrinter  implements Machine {
+   @Override
+   public void print(Document document) {
+      // Implementation for printing
+   }
+
+   @Override
+   public void scan(Document document) {
+      // Not valid method as this machine only print and dont scan
+   }
+}
+```
+Here's a revised example that adheres to the Interface Segregation Principle:
+
+```Java
+// Separate interfaces for print and scan functionality
+interface Printer {
+    void print(Document document);
+}
+
+interface Scanner {
+    void scan(Document document);
+}
+
+// Concrete classes implementing specific interfaces
+class SimplePrinter implements Printer {
+    @Override
+    public void print(Document document) {
+        // Implementation for printing
+    }
+}
+
+class MultiFunctionMachine implements Printer, Scanner {
+    @Override
+    public void print(Document document) {
+        // Implementation for printing
+    }
+
+    @Override
+    public void scan(Document document) {
+        // Implementation for scanning
+    }
+}
+```
+
+Now, the Printer and Scanner interfaces are separate, allowing classes to implement only the functionality they need. The SimplePrinter class implements only the Printer interface, and the MultiFunctionMachine class implements both the Printer and Scanner interfaces. This adheres to the Interface Segregation Principle, ensuring that classes are not burdened with unnecessary methods.
+
+## Dependency injection
+Dependency Injection (DI) is a design pattern and a technique in software development where the dependencies of a class, rather than being created within the class itself, are provided (injected) from the outside. In other words, instead of a class creating its own dependencies, those dependencies are supplied externally, typically through constructor parameters, method parameters, or property setters.
+
+In simpler terms, Dependency Injection is a way of achieving inversion of control, where the control over the creation and management of objects is shifted from the class itself to an external entity, often a framework or a container.
+
+### Example
+Simple blogging application where we have a BlogService class that depends on a NotificationService for sending notifications.
+
+```Java
+// NotificationService interface
+public interface NotificationService {
+    void sendNotification(String message);
+}
+
+// EmailNotificationService implementation of NotificationService
+public class EmailNotificationService implements NotificationService {
+    @Override
+    public void sendNotification(String message) {
+        // Implementation for sending email notifications
+        System.out.println("Sending email notification: " + message);
+    }
+}
+
+// BlogService class with dependency injection
+public class BlogService {
+    private final NotificationService notificationService;
+
+    // Constructor injection for providing the NotificationService dependency
+    public BlogService(NotificationService notificationService) {
+        this.notificationService = notificationService;
+    }
+
+    // Method in BlogService that uses the injected NotificationService
+    public void publishPost(String postTitle) {
+        // Logic to publish a blog post
+        // Notify subscribers using the injected NotificationService
+        notificationService.sendNotification("New blog post published: " + postTitle);
+    }
+}
+
+// Application class where DI is used to create objects and wire dependencies
+public class BlogApp {
+    public static void main(String[] args) {
+        // Create an instance of EmailNotificationService
+        NotificationService emailNotificationService = new EmailNotificationService();
+
+        // Inject the EmailNotificationService into the BlogService
+        BlogService blogService = new BlogService(emailNotificationService);
+
+        // Use the BlogService to publish a post
+        blogService.publishPost("Dependency Injection in Action");
+    }
+}
+```
+By using Dependency Injection, the BlogService class is not tightly coupled to a specific implementation of NotificationService. This makes it easier to switch to a different notification service implementation (e.g., SMS notification service) without modifying the BlogService class. It also makes testing easier, as we can inject mock implementations for testing purposes.
+
+# Design Patterns 
 
 ## Creational Patterns
 
-## Purpose: 
+### Purpose: 
 Creational patterns deal with object creation mechanisms, trying to create objects in a manner suitable to the situation.
 
-## Focus: 
+### Focus: 
 They focus on how objects are instantiated and composed to form larger structures.
 1. **Singleton Pattern:**
    - Ensures a class has only one instance and provides a global point of access to it.
@@ -65,11 +384,11 @@ They focus on how objects interact and communicate with each other, encapsulatin
 
 The Singleton Pattern is a design pattern that ensures a class has only one instance and provides a global point of access to that instance. It is particularly useful when exactly one object is needed to coordinate actions across the system.
 
-## Overview
+### Overview
 
 The pattern allows us to create a class for which only one object can be created, providing a global point of access to that instance throughout the application.
 
-### Example
+#### Example
 - If the ShoppingCart bean were configured as a singleton, a single instance of the ShoppingCart would be shared among all users of the application. This would lead to undesirable behavior in the context of a shopping cart, where each user should have their own isolated cart.
 
 ## Advantages
@@ -80,7 +399,7 @@ The pattern allows us to create a class for which only one object can be created
 2. **Maintain Consistency in Data:**
    - Ensures that there is a single source of truth, maintaining consistency in the data managed by the singleton instance.
 
-## Common Use Cases
+### Common Use Cases
 
 1. **Database Connection:**
    - In scenarios where establishing a database connection is resource-intensive, a singleton pattern can be used to ensure that only one connection is created and reused throughout the application.
@@ -116,8 +435,8 @@ public class Singleton {
 }
 ```
 
-# Builder Design Pattern
-## Overview
+## Builder Design Pattern
+### Overview
 The Builder pattern provides a simple and safe way to build objects that have many optional parameters, addressing the telescoping constructor problem.
 
 When we have too many parameter setting constructors for each field or a combination of many fields is cumbersome, leading to code complexity like below, which is called the telescoping constructor solution. This is not suitable
@@ -151,7 +470,7 @@ public Book(String isbn, String title) {
     }
 ```
 
-## Why Use the Builder Design Pattern?
+### Why Use the Builder Design Pattern?
 1. **Flexible Object Construction:**
    - The pattern allows the construction of a complex object to be done step by step, enabling the creation of different representations of the same object.
 
@@ -164,16 +483,11 @@ public Book(String isbn, String title) {
 4. **Avoids Telescoping Constructors:**
    - Provides a more readable and maintainable alternative to telescoping constructors when dealing with a large number of optional parameters.
 
-# Prototype Pattern
+## Prototype Pattern
 
 The Prototype Design Pattern is a creational design pattern that involves creating new objects by copying an existing object, known as the prototype. This pattern is useful when the cost of creating a new object is more expensive than copying an existing one.
 
 ```Java
-
-/**
- * Prototype Design Pattern Example
- */
-
 // Step 1: Create a prototype interface
 interface PersonPrototype {
     PersonPrototype clone();
@@ -236,26 +550,26 @@ public class PrototypeExample {
     }
 }
 ```
-# Prototype with Registry
+## Prototype with Registry
 
-## Overview
+### Overview
 The Prototype Design Pattern involves creating new objects by copying an existing object, while the Prototype Registry centralizes the management of prototypes. This combination is useful when creating objects involves a costly or complex initialization process.
 
-## Prototype Pattern:
+### Prototype Pattern:
 The Prototype Pattern is a creational design pattern that involves creating new objects by copying an existing object, known as the prototype. Instead of using a constructor, objects are cloned to create new instances. This pattern is useful when the cost of creating a new object is more expensive than copying an existing one.
 
-## Prototype Registry (or Prototype Manager) Pattern:
+### Prototype Registry (or Prototype Manager) Pattern:
 The Prototype Registry Pattern involves using a registry or manager to keep track of various prototypes. This registry provides a central place to store and retrieve prototype objects. Instead of creating and maintaining instances directly, clients can request instances from the registry.
 
-# Factory Pattern:
+## Factory Pattern:
 
 The Factory Pattern provides an interface for creating objects in a super class but allows subclasses to alter the type of objects that will be created. It involves a single interface or abstract class with a method for creating objects, and multiple concrete classes that implement this interface to create different types of objects.
 
-# Abstract Factory Pattern:
+## Abstract Factory Pattern:
 
 The Abstract Factory Pattern provides an interface for creating families of related or dependent objects without specifying their concrete classes. It involves multiple interfaces or abstract classes (one for each type of object), each with multiple concrete implementations. The concrete factories produce families of related objects.
 
-## When to use each
+### When to use each
 
 Factory Pattern is suitable for creating a single type of object, while the Abstract Factory Pattern is suitable for creating families of related objects with multiple variations. The choice between them depends on the complexity and structure of the objects you need to create in your application.
 
@@ -274,14 +588,14 @@ Read more: https://javarevisited.blogspot.com/2011/12/observer-design-pattern-ja
 
 2. When interest rate of Loan is subject to change and when it changes, Loan notifies to Newspaper or Internet media to display a new loan interest rate.
 
-## How it Works
+### How it Works
 
 ### Components
 1. **Subject:** The object that holds a list of observers and notifies them of state changes.
 
 2. **Observer:** An interface or abstract class that defines the update method. Concrete observers implement this method to react to changes.
 
-## Implementation Example
+### Implementation Example
 
 we have a Subject interface that contains methods for adding, removing and notifying Observers and an Observer interface which contains update(int interest) method which will be called by the Subject implementation when the interest rate changes.
 
@@ -357,7 +671,7 @@ This pattern is particularly useful when there are multiple ways to perform a ta
 3. **Payment strategy:** Different payment methods can be encapsulated into separate strategies and passed to an object that needs to process payments.
    - In a shopping cart application, the Strategy Design Pattern can be employed to neatly organize various payment methods, such as credit card, PayPal, and cryptocurrency, into distinct strategies. Each strategy encapsulates its own unique processing logic. This approach enables the application's payment processing system to delegate the payment handling tasks to the active payment method's strategy.
 
-## Implementation Example
+### Implementation Example
 
 1. **PaymentStrategy Interface:** Declares a method for executing the payment strategy.
 ```Java
@@ -550,23 +864,23 @@ Now, to cater to the diverse preferences of customers, your system employs the D
 - **Reusable Components:** Decorators can be reused and combined in various ways.
 - **Open/Closed Principle:** Follows the open/closed principle, allowing for extension without modifying existing code.
 
-# Facade Pattern
+## Facade Pattern
 
 The Facade Design Pattern is a structural pattern that provides a simplified interface to a set of interfaces in a subsystem, making it easier to use and reducing the complexity of interacting with the subsystem. It involves creating a unified interface that wraps multiple interfaces in a subsystem to make them more accessible.
 
-# Example
+### Example
 
 Subsystems for a television and a sound system, and we'll create a HomeTheaterFacade to simplify the control of these subsystems.
 
 src/main/java/org/design/structural/facade/hometheater/Main.java
 
-# FlyWeight Pattern
+## FlyWeight Pattern
 
 FlyWeight pattern is used to reduce the memory footprint. It can also improve performance in applications where object instantiation is expensive.
 
 Simply put, the flyweight pattern is based on a factory which recycles created objects by storing them after creation. Each time an object is requested, the factory looks up the object in order to check if it’s already been created. If it has, the existing object is returned – otherwise, a new one is created, stored and then returned.
 
-## Example
+### Example
 
 In the context of a Counter-Strike game, the Flyweight Factory Pattern can be applied to optimize the creation of multiple terrorist and counter-terrorist players with similar behaviors. Specifically, terrorists share common characteristics related to placing bombs, and counter-terrorists share common characteristics related to defusing bombs.
 
