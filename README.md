@@ -186,7 +186,29 @@ public class Ostrich extends Bird {
     }
 }
 ```
+Now, let's demonstrate how objects of a subclass can replace objects of the superclass without affecting the correctness of the program:
 In this revised example, the Ostrich class does not implement the FlyingBird interface, and it doesn't include the fly method. Now, when using objects of FlyingBird, we can be confident that all implementing classes can actually fly, adhering to the Liskov Substitution Principle.
+
+```Java
+public class LSPExample {
+    static void birdInAction(Bird bird) {
+        bird.fly();
+    }
+
+    public static void main(String[] args) {
+        // Using an object of the superclass
+        Bird genericBird = new Bird();
+        birdInAction(genericBird);  // Output: "I can fly"
+
+        // Using an object of the subclass (LSP in action)
+        Sparrow sparrow = new Sparrow();
+        birdInAction(sparrow);  // Output: "I can fly"
+    }
+}
+```
+In this example, the birdInAction method takes an object of the Bird class as a parameter. According to LSP, we should be able to substitute an object of any subclass of Bird without affecting the correctness of the program.
+
+When we pass an instance of Sparrow to birdInAction, it works correctly because Sparrow is a subclass of Bird and inherits the fly() method. The behavior of the program is consistent, and substituting Sparrow for Bird does not break anything.
 
 ## Interface segregation principle.
 
