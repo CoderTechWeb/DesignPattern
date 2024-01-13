@@ -457,7 +457,7 @@ public class Singleton {
 }
 ```
 
-## Builder Design Pattern
+# Builder Design Pattern
 ### Overview
 The Builder pattern provides a simple and safe way to build objects that have many optional parameters, addressing the telescoping constructor problem.
 
@@ -505,7 +505,7 @@ public Book(String isbn, String title) {
 4. **Avoids Telescoping Constructors:**
    - Provides a more readable and maintainable alternative to telescoping constructors when dealing with a large number of optional parameters.
 
-## Prototype Pattern
+# Prototype Pattern
 
 The Prototype Design Pattern is a creational design pattern that involves creating new objects by copying an existing object, known as the prototype. This pattern is useful when the cost of creating a new object is more expensive than copying an existing one.
 
@@ -572,7 +572,7 @@ public class PrototypeExample {
     }
 }
 ```
-## Prototype with Registry
+# Prototype with Registry
 
 ### Overview
 The Prototype Design Pattern involves creating new objects by copying an existing object, while the Prototype Registry centralizes the management of prototypes. This combination is useful when creating objects involves a costly or complex initialization process.
@@ -597,7 +597,7 @@ Factory Pattern is suitable for creating a single type of object, while the Abst
 
 # Behavioral Patterns
 
-## Observer Pattern
+# Observer Pattern
 
 The Observer Pattern is a behavioral design pattern where an object, known as the subject, maintains a list of its dependents, called observers, that are notified of any state changes, typically by calling one of their methods.
 
@@ -680,7 +680,7 @@ we have a Subject interface that contains methods for adding, removing and notif
 
 2. **Flexibility:** It supports a one-to-many dependency relationship between objects, enabling dynamic runtime changes.
 
-## Strategy Pattern
+# Strategy Pattern
 
 The Strategy Design Pattern is a behavioral design pattern. It allows you to dynamically change the behavior of an object by encapsulating it into different strategies.
 
@@ -763,7 +763,7 @@ This pattern is particularly useful when there are multiple ways to perform a ta
 
 # Structural Pattern
 
-## Decorator Design Pattern
+# Decorator Design Pattern
 
 A Decorator pattern can be used to attach additional responsibilities to an object either statically or dynamically. A Decorator provides an enhanced interface to the original object.
 
