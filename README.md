@@ -583,6 +583,44 @@ The Prototype Pattern is a creational design pattern that involves creating new 
 ### Prototype Registry (or Prototype Manager) Pattern:
 The Prototype Registry Pattern involves using a registry or manager to keep track of various prototypes. This registry provides a central place to store and retrieve prototype objects. Instead of creating and maintaining instances directly, clients can request instances from the registry.
 
+```Java
+    public class ShapeRegistry {
+        private final Map<String, Shape> shapeMap;
+
+        public ShapeRegistry() {
+            shapeMap = new HashMap<>();
+            shapeMap.put("circle", new Circle());
+            shapeMap.put("Square", new Square());
+        }
+
+        public void addShape(String key, Shape shape) {
+            shapeMap.put(key, shape);
+        }
+
+        public Shape getShape(String key) {
+            Shape shape = shapeMap.get(key);
+            if (shape != null)
+                return shape.clone();
+            return null;
+        }
+    }
+
+    //main class
+    public static void main(String[] args) {
+        ShapeRegistry shapeRegistry = new ShapeRegistry();
+
+        Shape circle = shapeRegistry.getShape("circle");
+        circle.draw();
+
+        Shape square = shapeRegistry.getShape("Square");
+        square.draw();
+
+        shapeRegistry.addShape("triangle", new Triangle());
+        Shape triangle = shapeRegistry.getShape("triangle");
+        if (triangle != null) triangle.draw();
+    }
+```
+
 ## Factory Pattern:
 
 The Factory Pattern provides an interface for creating objects in a super class but allows subclasses to alter the type of objects that will be created. It involves a single interface or abstract class with a method for creating objects, and multiple concrete classes that implement this interface to create different types of objects.
