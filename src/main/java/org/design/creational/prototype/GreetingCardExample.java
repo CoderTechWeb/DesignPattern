@@ -9,9 +9,11 @@ public class GreetingCardExample {
         card1.customize("Alice");
         card1.addElement("Wishing you a wonderful day!");
 
+        
         GreetingCardPrototype card2 = prototypeCard.clone();
         card2.customize("Bob");
         card2.addElement("Enjoy your special moment!");
+        System.out.println(card2);
 
         System.out.println("Card 1:" + card1);
         card1.display();
