@@ -625,6 +625,51 @@ The Prototype Registry Pattern involves using a registry or manager to keep trac
 
 The Factory Pattern provides an interface for creating objects in a super class but allows subclasses to alter the type of objects that will be created. It involves a single interface or abstract class with a method for creating objects, and multiple concrete classes that implement this interface to create different types of objects.
 
+```Java
+
+    public interface Pizza {
+        void prepare();
+        void bake();
+        void cut();
+        void box();
+    }
+
+    //factory
+    public class PizzaFactory {
+
+        public Pizza createPizza(String pizzaType) {
+            if ("cheese".equals(pizzaType)) {
+                return new CheesePizza();
+            } else if ("pepperoni".equals(pizzaType)) {
+                return new PepperoniPizza();
+            } else {
+                throw new IllegalArgumentException("Invalid pizza type");
+            }
+        }
+    }
+
+    //main
+    public static void main(String[] args) {
+		PizzaFactory pizzaFactory = new PizzaFactory();
+
+		// Order a cheese pizza
+		System.out.println("---------------- Cheese Pizza ----------------");
+		Pizza cheesePizza = pizzaFactory.createPizza("cheese");
+		cheesePizza.prepare();
+		cheesePizza.bake();
+		cheesePizza.cut();
+		cheesePizza.box();
+
+		// Order a pepperoni pizza
+		System.out.println("---------------- Pepperoni Pizza ----------------");
+		Pizza pepperoniPizza = pizzaFactory.createPizza("pepperoni");
+		pepperoniPizza.prepare();
+		pepperoniPizza.bake();
+		pepperoniPizza.cut();
+		pepperoniPizza.box();
+	}
+```
+
 ## Abstract Factory Pattern:
 
 The Abstract Factory Pattern provides an interface for creating families of related or dependent objects without specifying their concrete classes. It involves multiple interfaces or abstract classes (one for each type of object), each with multiple concrete implementations. The concrete factories produce families of related objects.
