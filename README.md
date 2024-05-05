@@ -621,7 +621,7 @@ The Prototype Registry Pattern involves using a registry or manager to keep trac
     }
 ```
 
-## Factory Pattern:
+# Factory Pattern:
 
 The Factory Pattern provides an interface for creating objects in a super class but allows subclasses to alter the type of objects that will be created. It involves a single interface or abstract class with a method for creating objects, and multiple concrete classes that implement this interface to create different types of objects.
 
@@ -670,7 +670,7 @@ The Factory Pattern provides an interface for creating objects in a super class 
 	}
 ```
 
-## Abstract Factory Pattern:
+# Abstract Factory Pattern:
 
 The Abstract Factory Pattern provides an interface for creating families of related or dependent objects without specifying their concrete classes. It involves multiple interfaces or abstract classes (one for each type of object), each with multiple concrete implementations. The concrete factories produce families of related objects.
 
