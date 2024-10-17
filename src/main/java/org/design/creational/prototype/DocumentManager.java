@@ -14,5 +14,4 @@ public class DocumentManager {
     public Document createDocument(String key){
         return documentTemplate.get(key).clone();
     }
-
 }
